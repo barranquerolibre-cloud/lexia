@@ -1,0 +1,19 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# Se generan al desplegar o al usar la aplicación
+backend/gestor.db
+backend/*.joblib
+backend/modelos_info.json
+evidencia/*.db
+evidencia/registro_*.log
+
+# Herramientas locales
+node_modules/
+web/.preview/
+.claude/
+graphify-out/
+revision_pagina_*.png
+expediente_*.pdf

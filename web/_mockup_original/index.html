@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lexia · Inteligencia Artificial en Derecho</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="app-shell">
+  <aside class="sidebar">
+    <a class="brand" href="./"><span class="brand-mark">L<span>·</span></span>lexia<span class="brand-dot">.</span></a>
+    <div class="workspace-label">WORKSPACE JURÍDICO</div>
+    <a class="nav active" href="#clasificador"><span>▦</span> Clasificador <span class="nav-arrow">↗</span></a>
+    <a class="nav" href="#categorias"><span>↗</span> Áreas de análisis</a><a class="nav" href="#ruta"><span>↗</span> Cómo funciona</a><div class="sidebar-card"><span class="small-icon">✧</span><h3>La tecnología apoya.<br>Tu criterio decide.</h3><p>Una herramienta de apoyo para organizar documentos y orientar su revisión jurídica.</p></div>
+    <div class="sidebar-footer"><span class="avatar">IA</span><div>IA & Derecho<small>Laboratorio 03</small></div><span class="footer-dot"></span></div>
+  </aside>
+  <main id="clasificador">
+    <header><div class="breadcrumb">Espacio de trabajo <span>/</span> <strong>Clasificador</strong></div><span class="demo-badge"><i></i> Prototipo interactivo</span></header>
+    <section class="page-heading"><div><div class="eyebrow">TU ASISTENTE DE CLASIFICACIÓN JURÍDICA</div><h1>Menos búsqueda.<br><em>Más claridad.</em></h1><p>Un primer vistazo al asunto detrás de cada tutela.</p></div><span class="heading-pill">✧ &nbsp; IA + Derecho</span></section>
+    <section class="hero"><div class="hero-copy"><span class="hero-kicker">APRENDER. EXPLORAR. CONECTAR.</span><h2>El Derecho tiene contexto.<br>La inteligencia, también.</h2><p>Especialización en Inteligencia Artificial en Derecho</p><a href="#document">Explorar el clasificador <span>↗</span></a></div>
+<svg class="hero-art" viewBox="0 0 320 230" fill="none" aria-hidden="true"><ellipse cx="163" cy="210" rx="124" ry="11" fill="#c6d7f1" opacity=".55"/><circle cx="170" cy="117" r="92" fill="#d4e4fc"/><circle cx="276" cy="39" r="15" fill="#d2c7fa"/><path d="m272 39 3 3 6-7" stroke="#7b61d0" stroke-width="2" stroke-linecap="round"/><rect x="57" y="56" width="128" height="150" rx="12" transform="rotate(-9 57 56)" fill="#fafcff"/><rect x="70" y="65" width="128" height="150" rx="12" fill="white"/><rect x="86" y="84" width="69" height="7" rx="3.5" fill="#d7dff0"/><path d="M86 104h93m-93 12h79m-79 12h89" stroke="#e6ebf6" stroke-width="5" stroke-linecap="round"/><rect x="86" y="153" width="42" height="32" rx="6" fill="#e7defb"/><path d="m98 170 6 5 12-14" stroke="#8869cd" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><path d="M196 62v139m-28 0h56M152 92h87" stroke="#5443b8" stroke-width="7" stroke-linecap="round"/><circle cx="196" cy="77" r="12" fill="#7562d4"/><path d="m156 94-22 46h44l-22-46Zm77 0-22 46h44l-22-46Z" fill="#a497ed" fill-opacity=".25" stroke="#7562d4" stroke-width="3" stroke-linejoin="round"/><path d="M134 140c0 16 44 16 44 0m33 0c0 16 44 16 44 0" fill="#7562d4"/><rect x="195" y="155" width="82" height="43" rx="12" transform="rotate(8 195 155)" fill="#4938b6"/><path d="m212 177 10 9 18-18" stroke="#48e2ce" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><path d="M39 100v16m-8-8h16M249 62v12m-6-6h12" stroke="#9c8edc" stroke-width="3" stroke-linecap="round"/><circle cx="47" cy="171" r="7" fill="#81d9d6"/></svg></section>
+<section class="category-section" id="categorias"><div class="section-heading"><h2>¿Qué podemos explorar?</h2><span>03 CATEGORÍAS ─</span></div><div class="category-grid">
+<button class="category-card" data-example="trabajo"><span class="category-mini peach">▱</span><span><strong>Derecho al trabajo</strong><small>Estabilidad y reintegro</small></span><span class="card-track"><i></i></span></button>
+<button class="category-card" data-example="vital"><span class="category-mini mint">♡</span><span><strong>Mínimo vital</strong><small>Subsistencia y vida digna</small></span><span class="card-track"><i></i></span></button>
+<button class="category-card featured" data-example="merito"><span class="category-mini purple">✧</span><span><strong>Meritocracia</strong><small>Acceso por mérito</small></span><span class="card-track"><i></i></span></button></div></section>
+<div class="section-heading analysis-heading"><h2>Vamos a tu documento</h2><span><i class="status-dot"></i> ENTORNO DE PRUEBA</span></div>
+<p class="demo-notice">Estás en modo demostración. Las categorías y los porcentajes que verás son ilustrativos.</p>
+    <section class="main-grid">
+      <article class="panel editor-panel">
+        <div class="panel-title"><div><span class="step">01</span><h2>Ingresa una tutela</h2></div><button id="clear" class="text-button">Limpiar <span>↺</span></button></div>
+        <div class="tabs" role="tablist" aria-label="Ingreso del documento"><button id="write-tab" class="tab active" role="tab" aria-selected="true" aria-controls="write-pane" data-tab="write">Pegar texto</button><button id="upload-tab" class="tab" role="tab" aria-selected="false" aria-controls="upload-pane" tabindex="-1" data-tab="upload">Cargar archivo <span>↥</span></button></div>
+        <div id="write-pane" role="tabpanel" aria-labelledby="write-tab"><label for="document">Texto de la acción de tutela</label><textarea id="document" placeholder="Cada documento cuenta una historia.&#10;Pega aquí el texto de la tutela para empezar…" maxlength="30000"></textarea><div class="editor-meta"><span><span class="privacy-dot"></span> Tu texto permanece en este navegador</span><span id="counter">0 caracteres</span></div></div>
+        <div id="upload-pane" role="tabpanel" aria-labelledby="upload-tab" hidden><label class="dropzone" id="dropzone" for="file"><span class="upload-icon">↥</span><strong>Arrastra tu documento aquí</strong><span>o haz clic para seleccionarlo</span><small>Archivo .txt · máximo 1 MB</small></label><input id="file" type="file" accept=".txt,text/plain" hidden><p id="file-name" class="file-name" aria-live="polite"></p></div>
+        <p id="error" class="error" role="alert" hidden></p>
+        <div class="examples"><span>¿Solo quieres explorar?</span><div><button data-example="trabajo">↗ Derecho al trabajo</button><button data-example="vital">↗ Mínimo vital</button><button data-example="merito">↗ Meritocracia</button></div></div>
+        <button id="classify" class="primary-button"><span>Analizar documento</span><span>↗</span></button><p class="button-caption">Vista previa del flujo de clasificación · Sin conexión al modelo</p>
+      </article>
+      <article class="panel result-panel" aria-live="polite" aria-busy="false">
+        <div class="panel-title"><div><span class="step">02</span><h2>Tu resultado</h2></div><span class="result-tag">VISTA PREVIA</span></div>
+        <div id="empty-result" class="empty-result"><div class="orb"><span>⚖</span><i class="orb-star">✧</i></div><span class="empty-eyebrow">UN TEXTO, NUEVAS POSIBILIDADES</span><h3>La claridad empieza<br>con un documento.</h3><p>Ingresa un texto y explora cómo se<br>presentará su clasificación.</p><div class="flow"><span>Texto</span><b>→</b><span>Análisis</span><b>→</b><span>Categoría</span></div></div>
+        <div id="loading-result" class="loading-result" hidden><div class="spinner"></div><h3>Preparando la vista previa</h3><p>Simulando el recorrido de tu documento…</p></div>
+        <div id="filled-result" hidden><div class="result-label">CATEGORÍA ILUSTRATIVA <span>DEMO</span></div><div class="category-icon">⚖</div><h3 id="category-name"></h3><p id="category-description" class="category-description"></p><div class="distribution"><div class="distribution-heading">Distribución de ejemplo <span>Simulada</span></div><div id="bars"></div></div><div class="human-note"><span>◎</span><p><strong>La última palabra es humana.</strong> Esta vista previa no analiza jurídicamente el texto ni representa la precisión de un modelo.</p></div><button id="again" class="secondary-button">Analizar otro documento <span>↗</span></button></div>
+        <div class="result-footer"><span>◌</span> Diseñado para acompañar tu criterio.</div>
+      </article>
+    </section>
+<section id="ruta" class="journey"><div><span class="journey-icon">✧</span><div><h2>Un recorrido sencillo</h2><p>Del documento a una categoría, paso a paso.</p></div></div><ol><li><span>1</span> Ingresa</li><li aria-hidden="true">→</li><li><span>2</span> Explora</li><li aria-hidden="true">→</li><li><span>3</span> Revisa</li></ol></section>
+    <footer class="page-footer"><span>Hecho para aprender. Diseñado para explorar.</span><span>Proyecto académico <span class="footer-separator">/</span> Laboratorio 3</span></footer>
+  </main>
+<aside class="academic-rail" aria-label="Información académica"><div class="rail-top"><span>AULA DE INNOVACIÓN</span><span class="academic-avatar">▤<i></i></span></div><div class="rail-intro"><span class="rail-overline">TECNOLOGÍA + JUSTICIA</span><h2>Especialización en<br><strong>Inteligencia Artificial<br>en Derecho</strong></h2><p>Del conocimiento a la práctica.</p></div><div class="lab-ring"><svg viewBox="0 0 160 160" aria-hidden="true"><circle class="ring-track" cx="80" cy="80" r="66"/><circle class="ring-value" cx="80" cy="80" r="66"/></svg><div><small>LABORATORIO</small><strong>03<span>↗</span></strong><span>Interfaz e integración</span></div></div><p class="rail-caption">Una experiencia jurídica<br>pensada desde la inteligencia artificial.</p><div class="rail-divider"></div><div class="module-heading"><h3>La ruta del proyecto</h3><span>01 — 03</span></div><ol class="module-list"><li><span class="module-number">01</span><div><strong>Explorar el lenguaje</strong><small>Clasificación de textos jurídicos</small></div></li><li><span class="module-number">02</span><div><strong>Diseñar el problema</strong><small>Categorías, datos y criterios</small></div></li><li class="current"><span class="module-number">03</span><div><strong>Conectar la experiencia</strong><small>Frontend e integración</small></div><span class="module-dot"></span></li></ol><div class="rail-note"><span>↗</span><p>La innovación comienza<br>con una buena pregunta.</p></div><div class="rail-bottom"><i></i> Fase actual: prototipo de interfaz</div></aside>
+</div>
+<script src="app.js"></script>
+</body>
+</html>

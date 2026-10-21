@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lexia · Gestor de tutelas, peticiones y demandas</title>
+  <link rel="stylesheet" href="styles.css"><link rel="stylesheet" href="gestor.css">
+</head>
+<body>
+<div class="app-shell">
+  <aside class="sidebar"></aside>
+  <main id="radicar">
+    <header><div class="breadcrumb">Gestor <span>/</span> <strong>Radicar</strong></div><span id="backend-badge" class="backend-badge"><i></i> Verificando…</span></header>
+    <section class="page-heading"><div><div class="eyebrow">GESTOR DE DOCUMENTOS JURÍDICOS</div><h1>Radica el documento.<br><em>El modelo lo clasifica.</em></h1><p>Pega el texto o sube PDF y Word. Tres modelos trabajan en cadena: el tipo de documento (tutela, derecho de petición o demanda), la rama del derecho (Laboratorio 1) y, si es una tutela, su asunto (Laboratorio 2). El expediente queda en la bandeja para que una persona lo revise.</p></div></section>
+
+    <section class="category-section" id="categorias"><div class="section-heading"><h2>¿Qué tipos de documento distingue?</h2><span>03 CATEGORÍAS ─ toca una para cargar un ejemplo</span></div><div class="category-grid">
+      <button class="category-card" data-example="tutela"><span class="category-mini purple">⚖</span><span><strong>Tutela</strong><small>Protege derechos fundamentales</small></span><span class="card-track"><i></i></span></button>
+      <button class="category-card" data-example="peticion"><span class="category-mini mint">✉</span><span><strong>Derecho de petición</strong><small>Solicita información o decisión</small></span><span class="card-track"><i></i></span></button>
+      <button class="category-card" data-example="demanda"><span class="category-mini peach">▤</span><span><strong>Demanda</strong><small>Inicia un proceso judicial</small></span><span class="card-track"><i></i></span></button>
+    </div>
+    <div class="examples chips"><span>Más ejemplos para probar los modelos:</span><div><button data-example="vital">Tutela · mínimo vital</button><button data-example="merito">Tutela · meritocracia</button><button data-example="nulidad">Demanda · administrativa</button></div></div></section>
+
+    <div class="section-heading analysis-heading"><h2>Radicar un documento</h2><span><i class="status-dot"></i> RESPUESTA REAL DEL MODELO</span></div>
+    <section class="main-grid">
+      <article class="panel editor-panel">
+        <div class="panel-title"><div><span class="step">01</span><h2>Ingresa el documento</h2></div><button id="clear" class="text-button">Limpiar <span>↺</span></button></div>
+        <div class="tabs" role="tablist" aria-label="Ingreso del documento">
+          <button id="write-tab" class="tab active" role="tab" aria-selected="true" aria-controls="write-pane" data-tab="write">Pegar texto</button>
+          <button id="upload-tab" class="tab" role="tab" aria-selected="false" aria-controls="upload-pane" tabindex="-1" data-tab="upload">Subir archivos <span>↥</span></button>
+        </div>
+        <div class="field"><label for="asunto">Título del expediente (opcional)</label><input id="asunto" type="text" maxlength="120" placeholder="Ej.: Despido durante tratamiento médico"></div>
+        <div id="write-pane" role="tabpanel" aria-labelledby="write-tab"><label for="document">Texto del documento</label><textarea id="document" placeholder="Pega aquí el texto de la tutela, el derecho de petición o la demanda…" maxlength="30000"></textarea><div class="editor-meta"><span>Mínimo 40 caracteres</span><span id="counter">0 caracteres</span></div></div>
+        <div id="upload-pane" role="tabpanel" aria-labelledby="upload-tab" hidden>
+          <label class="dropzone" id="dropzone" for="file"><span class="upload-icon">↥</span><strong>Arrastra tus documentos aquí</strong><span>o haz clic para seleccionarlos</span><small>PDF · Word (.docx) · .odt · .rtf · .txt · hasta 10 archivos</small></label>
+          <input id="file" type="file" accept=".pdf,.docx,.odt,.rtf,.txt,.md,.csv,.doc" multiple hidden>
+          <ul id="file-list" class="file-list" aria-live="polite"></ul>
+        </div>
+        <p id="error" class="error" role="alert" hidden></p>
+        <button id="classify" class="primary-button"><span>Radicar y clasificar</span><span>↗</span></button>
+        <p class="button-caption">El texto se envía al backend local, se clasifica con el modelo entrenado y se guarda en la bandeja. No subas datos personales reales.</p>
+      </article>
+
+      <article class="panel result-panel" aria-live="polite" aria-busy="false">
+        <div class="panel-title"><div><span class="step">02</span><h2>Resultado del sistema</h2></div><a class="text-button" href="/bandeja">Ir a la bandeja →</a></div>
+        <div id="empty-result" class="empty-result"><div class="orb"><span>⚖</span><i class="orb-star">✧</i></div><span class="empty-eyebrow">UN DOCUMENTO, UN EXPEDIENTE</span><h3>Aquí verás la respuesta<br>del modelo.</h3><p>Tipo, rama y asunto con su confianza,<br>tal como los devuelven los modelos.</p><div class="flow"><span>Texto o archivo</span><b>→</b><span>Tipo</span><b>→</b><span>Rama (Lab 1)</span><b>→</b><span>Asunto (Lab 2)</span></div></div>
+        <div id="loading-result" class="loading-result" hidden><div class="spinner"></div><h3>Procesando en el backend</h3><p id="loading-msg">Extrayendo texto y clasificando…</p></div>
+        <div id="filled-result" hidden><div id="result-list" class="result-list"></div></div>
+      </article>
+    </section>
+
+    <section id="ruta" class="journey"><div><span class="journey-icon">✧</span><div><h2>Un recorrido sencillo</h2><p>Del documento al expediente, paso a paso.</p></div></div><ol><li><span>1</span> Radica</li><li aria-hidden="true">→</li><li><span>2</span> Revisa</li><li aria-hidden="true">→</li><li><span>3</span> Resuelve</li></ol></section>
+    <footer class="page-footer"><span>Prototipo académico. La clasificación orienta; no sustituye el criterio jurídico.</span><span>Proyecto académico <span class="footer-separator">/</span> Laboratorio 3</span></footer>
+  </main>
+  <aside class="academic-rail" aria-label="Información académica"><div class="rail-top"><span>AULA DE INNOVACIÓN</span><span class="academic-avatar">▤<i></i></span></div><div class="rail-intro"><span class="rail-overline">TECNOLOGÍA + JUSTICIA</span><h2>Especialización en<br><strong>Inteligencia Artificial<br>en Derecho</strong></h2><p>Del conocimiento a la práctica.</p></div><div class="lab-ring"><svg viewBox="0 0 160 160" aria-hidden="true"><circle class="ring-track" cx="80" cy="80" r="66"/><circle class="ring-value" cx="80" cy="80" r="66"/></svg><div><small>LABORATORIO</small><strong>03<span>↗</span></strong><span>Interfaz e integración</span></div></div><p class="rail-caption">Frontend y backend conectados<br>con un modelo real.</p><div class="rail-divider"></div><div class="module-heading"><h3>La ruta del proyecto</h3><span>01 — 03</span></div><ol class="module-list"><li><span class="module-number">01</span><div><strong>Explorar el lenguaje</strong><small>Clasificación de textos jurídicos</small></div></li><li><span class="module-number">02</span><div><strong>Diseñar el problema</strong><small>Categorías, datos y criterios</small></div></li><li class="current"><span class="module-number">03</span><div><strong>Conectar la experiencia</strong><small>Frontend e integración</small></div><span class="module-dot"></span></li></ol><div class="rail-note"><span>↗</span><p>La guía paso a paso está<br>en el menú lateral.</p></div><div class="rail-bottom"><i></i> Fase actual: integración</div></aside>
+</div>
+<script src="common.js"></script>
+<script src="radicar.js"></script>
+</body>
+</html>

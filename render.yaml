@@ -1,0 +1,15 @@
+# Despliegue en Render (Blueprint). Sube el repositorio a GitHub y en Render: New + > Blueprint.
+services:
+  - type: web
+    name: lexia-gestor-juridico
+    runtime: python
+    plan: free
+    region: oregon
+    # Solo instala y entrena. NO regenera los CSV: así no se pisan las revisiones hechas a mano en datos/*.csv.
+    buildCommand: pip install -r backend/requirements.txt && python backend/entrenar.py
+    # 1 proceso: el modelo y la base SQLite viven en el mismo proceso (varios hilos para atender en paralelo).
+    startCommand: gunicorn --chdir backend app:app --bind 0.0.0.0:$PORT --workers 1 --threads 4 --timeout 120
+    healthCheckPath: /api/salud
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.7

@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bandeja · Lexia</title>
+  <link rel="stylesheet" href="styles.css"><link rel="stylesheet" href="gestor.css">
+</head>
+<body>
+<div class="app-shell no-rail">
+  <aside class="sidebar"></aside>
+  <main>
+    <header><div class="breadcrumb">Gestor <span>/</span> <strong>Bandeja</strong></div><span id="backend-badge" class="backend-badge"><i></i> Verificando…</span></header>
+    <section class="page-heading"><div><div class="eyebrow">EXPEDIENTES RADICADOS</div><h1>Bandeja de <em>documentos</em></h1><p>Todos los documentos clasificados, con su estado y plazo. Los marcados «Requiere revisión» tienen baja confianza del modelo y necesitan que una persona decida.</p></div><a class="btn" href="/">＋ Radicar documento</a></section>
+    <section class="stats" id="stats" aria-live="polite"></section>
+    <div class="filters">
+      <input id="q" type="search" placeholder="Buscar por título, archivo o texto…" aria-label="Buscar">
+      <select id="f-cat" aria-label="Filtrar por categoría"><option value="">Todas las categorías</option><option>Tutela</option><option>Derecho de petición</option><option>Demanda</option></select>
+      <select id="f-rama" aria-label="Filtrar por rama del derecho"><option value="">Todas las ramas</option><option>Derecho laboral</option><option>Derecho civil</option><option>Derecho administrativo</option></select>
+      <select id="f-tema" aria-label="Filtrar por asunto de la tutela"><option value="">Todos los asuntos</option><option>Derecho al trabajo</option><option>Mínimo vital</option><option>Meritocracia</option></select>
+      <select id="f-rev" aria-label="Filtrar por persona que revisó"><option value="">Todos los revisores</option></select>
+      <select id="f-est" aria-label="Filtrar por estado"><option value="">Todos los estados</option><option>Clasificado</option><option>Requiere revisión</option><option>En revisión</option><option>Atendido</option></select>
+      <button id="limpiar" class="btn-sec" type="button">Limpiar filtros</button>
+    </div>
+    <p id="error" class="alert err" role="alert" hidden></p>
+    <div class="table-wrap"><table class="bandeja"><thead><tr><th>#</th><th>Documento</th><th>Clasificación</th><th>Confianza</th><th>Estado</th><th>Revisado por</th><th>Plazo</th></tr></thead><tbody id="filas"></tbody></table><div id="vacio" class="vacio" hidden>No hay documentos con esos filtros.</div></div>
+    <footer class="page-footer"><span>Los plazos cuentan días hábiles sin festivos; confírmalos con la norma antes de usarlos.</span><span>Proyecto académico <span class="footer-separator">/</span> Laboratorio 3</span></footer>
+  </main>
+</div>
+<script src="common.js"></script>
+<script src="bandeja.js"></script>
+</body>
+</html>

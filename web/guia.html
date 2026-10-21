@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Guía paso a paso · Lexia</title>
+  <link rel="stylesheet" href="styles.css"><link rel="stylesheet" href="gestor.css">
+</head>
+<body>
+<div class="app-shell no-rail">
+  <aside class="sidebar"></aside>
+  <main>
+    <header><div class="breadcrumb">Gestor <span>/</span> <strong>Guía paso a paso</strong></div><span id="backend-badge" class="backend-badge"><i></i> Verificando…</span></header>
+    <section class="page-heading"><div><div class="eyebrow">LABORATORIO 3 · INTEGRACIÓN FRONTEND Y BACKEND</div><h1>Cómo resolver la tarea,<br><em>paso a paso</em></h1><p>Sigue los pasos en orden. Los recuadros «En vivo» consultan el backend real, así que sirven como evidencia de que la comunicación funciona.</p></div></section>
+    <ol class="steps" id="pasos">
+
+      <li class="step-card" id="p1"><h3>Entiende qué pide la guía</h3>
+        <p>El Laboratorio 3 pide una interfaz conectada a un backend que devuelva respuestas reales, más pruebas y evidencia. Así se cumple cada punto en este proyecto:</p>
+        <table class="mini"><thead><tr><th>La guía exige</th><th>Dónde está</th></tr></thead><tbody>
+          <tr><td>Nombre del aplicativo</td><td>«Lexia · Gestor de tutelas, peticiones y demandas» (menú lateral y título)</td></tr>
+          <tr><td>Cargar o ingresar documentos</td><td>Página <a href="/">Radicar</a>: pegar texto o subir PDF, Word, .odt, .rtf y .txt</td></tr>
+          <tr><td>Botón para iniciar el procesamiento</td><td>«Radicar y clasificar»</td></tr>
+          <tr><td>Espacio de resultados</td><td>Panel «Resultado del sistema» y <a href="/bandeja">Bandeja</a></td></tr>
+          <tr><td>Mensajes de validación y error</td><td>Texto vacío o corto, formato no soportado, PDF escaneado, backend caído, modelo no disponible</td></tr>
+          <tr><td>Integración con los componentes de los laboratorios anteriores</td><td>Laboratorio 1 → <strong>rama del derecho</strong> (laboral, civil, administrativo, con los 120 textos del cuaderno). Laboratorio 2 → <strong>asunto de la tutela</strong> (trabajo, mínimo vital, meritocracia). Los dos corren dentro del backend.</td></tr>
+          <tr><td>Comunicación real con el backend</td><td><code>POST /api/documentos</code> (Flask + modelo entrenado)</td></tr>
+          <tr><td>Pruebas, errores y pendientes</td><td>Paso 6 y 8 de esta guía</td></tr>
+        </tbody></table>
+      </li>
+
+      <li class="step-card" id="p2"><h3>Prepara el entorno</h3>
+        <p>Necesitas Python 3.10 o superior. Desde la carpeta del proyecto:</p>
+        <pre class="cmd">pip install -r backend/requirements.txt</pre>
+      </li>
+
+      <li class="step-card" id="p3"><h3>Genera los datos y entrena el modelo</h3>
+        <p>Hay tres clasificadores que trabajan en cadena, todos con la misma receta de los laboratorios: limpieza, TF-IDF y regresión logística.</p>
+        <table class="mini"><thead><tr><th>Modelo</th><th>Categorías</th><th>Datos</th></tr></thead><tbody>
+          <tr><td>Tipo de documento</td><td>Tutela · Derecho de petición · Demanda</td><td><code>datos/dataset.csv</code>: sintético</td></tr>
+          <tr><td>Rama del derecho (Lab 1)</td><td>Laboral · Civil · Administrativo</td><td><code>datos/rama_derecho.csv</code>: los 120 textos del cuaderno</td></tr>
+          <tr><td>Asunto de la tutela (Lab 2)</td><td>Derecho al trabajo · Mínimo vital · Meritocracia</td><td><code>datos/tutelas.csv</code>: creado por el equipo con ayuda de IA, pendiente de revisión</td></tr>
+        </tbody></table>
+        <p>El asunto solo se calcula cuando el tipo es Tutela. Si cualquiera de los modelos tiene baja confianza, el expediente queda en «Requiere revisión».</p>
+        <pre class="cmd">python datos/generar_dataset.py
+python datos/extraer_rama_derecho.py
+python datos/generar_tutelas.py
+python backend/entrenar.py</pre>
+        <div class="live" id="live-modelo">Consultando el modelo…</div>
+      </li>
+
+      <li class="step-card" id="p4"><h3>Levanta el backend</h3>
+        <pre class="cmd">python backend/app.py</pre>
+        <p>Abre <strong>http://127.0.0.1:5000</strong>. El mismo servidor entrega las páginas y la API, así que no hay problemas de CORS.</p>
+        <div class="live" id="live-salud">Consultando <code>GET /api/salud</code>…</div>
+      </li>
+
+      <li class="step-card" id="p5"><h3>Prueba la integración a mano</h3>
+        <ul>
+          <li>En <a href="/">Radicar</a> toca una tarjeta de ejemplo y pulsa «Radicar y clasificar».</li>
+          <li>Sube un PDF y un Word con una tutela. La respuesta trae la categoría, la confianza y las probabilidades del modelo.</li>
+          <li>Abre el expediente, corrige la categoría, cambia el estado y marca quién revisó. Comprueba que queda en el historial y descarga la ficha PDF con el nombre del revisor.</li>
+          <li>Prueba los errores: texto vacío, un archivo <code>.doc</code> y un PDF escaneado.</li>
+        </ul>
+      </li>
+
+      <li class="step-card" id="p6"><h3>Ejecuta las pruebas automáticas</h3>
+        <p>El script levanta el backend real y lo llama por HTTP con textos nuevos que no están en el dataset.</p>
+        <pre class="cmd">python pruebas/pruebas.py</pre>
+        <div class="live" id="live-pruebas">Consultando resultados…</div>
+      </li>
+
+      <li class="step-card" id="p7"><h3>Reúne la evidencia de comunicación</h3>
+        <p>Toma capturas de la pantalla de entrada y de la respuesta, y copia el registro del backend. Cada petición deja una línea con método, ruta, código HTTP, tiempo y resultado.</p>
+        <div class="live"><strong>Registro del backend (en vivo)</strong> <button class="text-button" id="refrescar" type="button">Actualizar ↺</button><div class="log" id="log" style="margin-top:8px">Cargando…</div></div>
+      </li>
+
+      <li class="step-card" id="p8"><h3>Documenta errores y pendientes</h3>
+        <p>La guía pide registrar lo que falló o falta. Estos son los límites reales de esta versión:</p>
+        <ul>
+          <li>Los datasets de tipo y de asunto son sintéticos y pequeños (≈24 fragmentos por categoría). Las exactitudes del asunto (≈99 %) son optimistas porque los textos usan expresiones muy claras; con tutelas reales será menor.</li>
+          <li>La rama del derecho usa los 120 textos del Laboratorio 1 y rinde alrededor del 80 %, igual que en el cuaderno. Confunde sobre todo civil con administrativo.</li>
+          <li>El asunto solo distingue tres asuntos: una tutela sobre salud u otro derecho se asignará igualmente a uno de los tres, aunque no corresponda. Por eso existe la revisión humana.</li>
+          <li>No hay OCR: un PDF escaneado se rechaza con un mensaje.</li>
+          <li>No se leen archivos <code>.doc</code> antiguos; hay que guardarlos como <code>.docx</code>.</li>
+          <li>Los plazos cuentan días hábiles sin festivos, y el de demanda es una referencia interna.</li>
+          <li>No hay usuarios ni autenticación; no debe usarse con datos personales reales.</li>
+        </ul>
+      </li>
+
+      <li class="step-card" id="p9"><h3>Prepara la entrega y la presentación</h3>
+        <p>Marca lo que ya tienes (se guarda en este navegador):</p>
+        <ul class="checks" id="entregables">
+          <li><label><input type="checkbox" data-k="codigo"> Código actualizado de la interfaz y del backend</label></li>
+          <li><label><input type="checkbox" data-k="capturas"> Capturas de la entrada y de la respuesta real</label></li>
+          <li><label><input type="checkbox" data-k="log"> Registro de ejecución del backend</label></li>
+          <li><label><input type="checkbox" data-k="tabla"> Tabla de pruebas (<code>evidencia/tabla_pruebas.md</code>)</label></li>
+          <li><label><input type="checkbox" data-k="pendientes"> Lista de errores y pendientes (paso 8)</label></li>
+          <li><label><input type="checkbox" data-k="datos"> Datasets revisados y firmados por el equipo (columna <code>revisado_por</code> de <code>dataset.csv</code> y <code>tutelas.csv</code>)</label></li>
+        </ul>
+        <p>Para la presentación responde solo estas cinco preguntas: ¿Qué problema resolvimos? ¿Cómo lo resolvimos? ¿Qué resultados obtuvimos? ¿En qué se equivocó? ¿Podría usarse realmente en Derecho?</p>
+      </li>
+    </ol>
+    <footer class="page-footer"><span>Esta guía consulta el backend en vivo; si está apagado, los recuadros lo indicarán.</span><span>Proyecto académico <span class="footer-separator">/</span> Laboratorio 3</span></footer>
+  </main>
+</div>
+<script src="common.js"></script>
+<script src="guia.js"></script>
+</body>
+</html>

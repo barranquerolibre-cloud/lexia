@@ -1,0 +1,239 @@
+{
+  "fecha": "2026-10-21 17:40:47",
+  "total": 28,
+  "pasan": 28,
+  "filas": [
+    {
+      "id": 1,
+      "caso": "Salud del backend",
+      "esperado": "HTTP 200 y los 3 modelos cargados",
+      "obtenido": "HTTP 200: modelo_ok=True, modelos=['rama', 'tema', 'tipo']",
+      "estado": "PASA",
+      "pendiente": ""
+    },
+    {
+      "id": 2,
+      "caso": "Tutela nueva sobre trabajo",
+      "esperado": "Tutela · asunto Derecho al trabajo",
+      "obtenido": "HTTP 200: Tutela (62%) · rama Derecho laboral (83%) · asunto Derecho al trabajo · estado «Clasificado»",
+      "estado": "PASA",
+      "pendiente": ""
+    },
+    {
+      "id": 3,
+      "caso": "Tutela nueva sobre mínimo vital",
+      "esperado": "Tutela · asunto Mínimo vital",
+      "obtenido": "HTTP 200: Tutela (72%) · rama Derecho laboral (69%) · asunto Mínimo vital · estado «Clasificado»",
+      "estado": "PASA",
+      "pendiente": ""
+    },
+    {
+      "id": 4,
+      "caso": "Tutela nueva sobre meritocracia",
+      "esperado": "Tutela · asunto Meritocracia",
+      "obtenido": "HTTP 200: Tutela (61%) · rama Derecho administrativo (71%) · asunto Meritocracia · estado «Clasificado»",
+      "estado": "PASA",
+      "pendiente": ""
+    },
+    {
+      "id": 5,
+      "caso": "Derecho de petición nuevo",
+      "esperado": "Derecho de petición · sin asunto de tutela",
+      "obtenido": "HTTP 200: Derecho de petición (84%) · rama Derecho administrativo (54%) · asunto — · estado «Clasificado»",
+      "estado": "PASA",
+      "pendiente": ""
+    },
+    {
+      "id": 6,
+      "caso": "Demanda nueva (ejecutiva)",
+      "esperado": "Demanda · rama Derecho civil · sin asunto",
+      "obtenido": "HTTP 200: Demanda (90%) · rama Derecho civil (58%) · asunto — · estado «Clasificado»",
+      "estado": "PASA",
+      "pendiente": ""
+    },
+    {
+      "id": 7,
+      "caso": "Tutela de salud (fuera de las 3 categorías del Lab 2)",
+      "esperado": "Se clasifica como Tutela y se deja el asunto a revisión humana",
+      "obtenido": "HTTP 200: Tutela, asunto forzado a «Derecho al trabajo» (44%), estado «Requiere revisión»",
+      "estado": "PASA",
+      "pendiente": "Limitación: el Lab 2 no tiene la categoría «Salud»; una persona debe revisar el asunto"
+    },
+    {
+      "id": 8,
+      "caso": "Texto ambiguo",
+      "esperado": "HTTP 200; si la confianza < 55 % queda «Requiere revisión»",
+      "obtenido": "HTTP 200: Tutela (41%), estado «Requiere revisión»",
+      "estado": "PASA",
+      "pendiente": "Un humano debe revisar este caso (texto ambiguo a propósito)"
+    },
+    {
+      "id": 9,
+      "caso": "Texto vacío",
+      "esperado": "HTTP 400 y mensaje que pide contenido",
+      "obtenido": "HTTP 400: El texto está vacío. Pega el contenido del documento o sube un archivo.",
+      "estado": "PASA",
+      "pendiente": ""
+    },
+    {
+      "id": 10,
+      "caso": "Texto demasiado corto",
+      "esperado": "HTTP 400 (mínimo 40 caracteres)",
+      "obtenido": "HTTP 400: El texto es muy corto (20 caracteres). Escribe al menos 40.",
+      "estado": "PASA",
+      "pendiente": ""
+    },
+    {
+      "id": 11,
+      "caso": "Archivo PDF con texto",
+      "esperado": "Tutela · asunto Derecho al trabajo",
+      "obtenido": "HTTP 200: Tutela (62%) · rama Derecho laboral (83%) · asunto Derecho al trabajo · estado «Clasificado»",
+      "estado": "PASA",
+      "pendiente": ""
+    },
+    {
+      "id": 12,
+      "caso": "Archivo Word (.docx)",
+      "esperado": "Derecho de petición",
+      "obtenido": "HTTP 200: Derecho de petición (84%) · rama Derecho administrativo (54%) · asunto — · estado «Clasificado»",
+      "estado": "PASA",
+      "pendiente": ""
+    },
+    {
+      "id": 13,
+      "caso": "Archivo de texto (.txt)",
+      "esperado": "Demanda",
+      "obtenido": "HTTP 200: Demanda (90%) · rama Derecho civil (58%) · asunto — · estado «Clasificado»",
+      "estado": "PASA",
+      "pendiente": ""
+    },
+    {
+      "id": 14,
+      "caso": "Word antiguo (.doc)",
+      "esperado": "HTTP 422 y pide convertir a .docx",
+      "obtenido": "HTTP 422: El formato .doc (Word antiguo) no se puede leer. Ábrelo y guárdalo como .docx o PDF.",
+      "estado": "PASA",
+      "pendiente": ""
+    },
+    {
+      "id": 15,
+      "caso": "PDF escaneado sin texto",
+      "esperado": "HTTP 422 y explica que no hay texto/OCR",
+      "obtenido": "HTTP 422: El PDF no tiene texto seleccionable (probablemente es un escaneo). Esta versión no aplica OCR: sube una versión con texto o pega el contenido.",
+      "estado": "PASA",
+      "pendiente": ""
+    },
+    {
+      "id": 16,
+      "caso": "Formato no soportado (.exe)",
+      "esperado": "HTTP 422 y lista de formatos",
+      "obtenido": "HTTP 422: Formato '.exe' no soportado. Usa PDF, Word (.docx), .odt, .rtf o .txt.",
+      "estado": "PASA",
+      "pendiente": ""
+    },
+    {
+      "id": 17,
+      "caso": "Lote de 3 archivos con uno inválido",
+      "esperado": "Procesa los válidos y reporta el inválido",
+      "obtenido": "HTTP 200: resultados por archivo = [True, False, True]",
+      "estado": "PASA",
+      "pendiente": ""
+    },
+    {
+      "id": 18,
+      "caso": "Corrección humana de categoría y estado",
+      "esperado": "Se guarda y queda en el historial",
+      "obtenido": "HTTP 200: categoría=Demanda, estado=En revisión, corregido=True",
+      "estado": "PASA",
+      "pendiente": ""
+    },
+    {
+      "id": 19,
+      "caso": "Corrección humana del asunto de la tutela",
+      "esperado": "Se guarda, conserva lo que propuso el modelo y queda en el historial",
+      "obtenido": "HTTP 200: asunto Derecho al trabajo → Mínimo vital; el modelo propuso Derecho al trabajo",
+      "estado": "PASA",
+      "pendiente": ""
+    },
+    {
+      "id": 20,
+      "caso": "Asunto de tutela en un documento que no es tutela",
+      "esperado": "HTTP 400 con mensaje claro",
+      "obtenido": "HTTP 400: El asunto de la tutela solo aplica a documentos de tipo Tutela.",
+      "estado": "PASA",
+      "pendiente": ""
+    },
+    {
+      "id": 21,
+      "caso": "Guardar una revisión sin indicar quién revisó",
+      "esperado": "HTTP 400 que pide al menos un revisor del equipo",
+      "obtenido": "HTTP 400: Indica quién revisó el documento (al menos una persona del equipo) para guardar los cambios.",
+      "estado": "PASA",
+      "pendiente": ""
+    },
+    {
+      "id": 22,
+      "caso": "Revisor que no pertenece al equipo",
+      "esperado": "HTTP 400 (solo se aceptan los integrantes de la lista)",
+      "obtenido": "HTTP 400: Revisor no válido: elige integrantes de la lista del equipo.",
+      "estado": "PASA",
+      "pendiente": ""
+    },
+    {
+      "id": 23,
+      "caso": "Ficha PDF del expediente con los revisores",
+      "esperado": "PDF válido que contiene el nombre de cada persona que revisó",
+      "obtenido": "PDF de 102 KB; incluye los nombres de los revisores: True",
+      "estado": "PASA",
+      "pendiente": ""
+    },
+    {
+      "id": 24,
+      "caso": "Bandeja filtrada por revisor",
+      "esperado": "Solo expedientes revisados por esa persona",
+      "obtenido": "HTTP 200: 1 expedientes revisados por Willigton Herrera",
+      "estado": "PASA",
+      "pendiente": ""
+    },
+    {
+      "id": 25,
+      "caso": "Estado inválido",
+      "esperado": "HTTP 400",
+      "obtenido": "HTTP 400: Estado no válido.",
+      "estado": "PASA",
+      "pendiente": ""
+    },
+    {
+      "id": 26,
+      "caso": "Expediente inexistente",
+      "esperado": "HTTP 404 con mensaje",
+      "obtenido": "HTTP 404: El documento no existe.",
+      "estado": "PASA",
+      "pendiente": ""
+    },
+    {
+      "id": 27,
+      "caso": "Fallo de carga del modelo",
+      "esperado": "HTTP 503 con mensaje claro",
+      "obtenido": "HTTP 503: No existe el modelo «tipo» (modelo_tipo.joblib). Ejecuta: python backend/entrenar.py",
+      "estado": "PASA",
+      "pendiente": ""
+    },
+    {
+      "id": 28,
+      "caso": "Bandeja filtrada por categoría",
+      "esperado": "Solo expedientes de la categoría pedida",
+      "obtenido": "HTTP 200: 10 expedientes de Tutela en la bandeja",
+      "estado": "PASA",
+      "pendiente": ""
+    }
+  ],
+  "manuales": [
+    {
+      "caso": "Interfaz con el backend apagado",
+      "esperado": "La página muestra «Backend sin conexión» y un mensaje claro",
+      "obtenido": "Verificado en navegador (ver evidencia/capturas)",
+      "pendiente": "Repetir antes de entregar"
+    }
+  ]
+}

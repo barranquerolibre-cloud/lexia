@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Expediente · Lexia</title>
+  <link rel="stylesheet" href="styles.css"><link rel="stylesheet" href="gestor.css">
+</head>
+<body>
+<div class="app-shell no-rail">
+  <aside class="sidebar"></aside>
+  <main>
+    <header><div class="breadcrumb">Gestor <span>/</span> <a href="/bandeja">Bandeja</a> <span>/</span> <strong id="crumb">Expediente</strong></div><span id="backend-badge" class="backend-badge"><i></i> Verificando…</span></header>
+    <a class="back" href="/bandeja">← Volver a la bandeja</a>
+    <p id="error" class="alert err" role="alert" hidden></p>
+    <div id="contenido" hidden>
+      <section class="page-heading"><div><div class="eyebrow" id="sub"></div><h1 id="titulo"></h1></div></section>
+      <section class="doc-grid">
+        <article class="panel">
+          <div class="panel-title"><div><span class="step">01</span><h2>Texto del documento</h2></div></div>
+          <pre class="texto-doc" id="texto"></pre>
+        </article>
+        <div style="display:grid;gap:17px;align-content:start">
+          <article class="panel">
+            <div class="panel-title"><div><span class="step">02</span><h2>Clasificación del modelo</h2></div></div>
+            <div id="clasificacion"></div>
+          </article>
+          <article class="panel">
+            <div class="panel-title"><div><span class="step">03</span><h2>Revisión humana</h2></div></div>
+            <div class="field" style="margin-top:14px"><label for="categoria">Tipo de documento confirmado</label><select id="categoria"></select></div>
+            <div class="field"><label for="rama">Rama del derecho confirmada</label><select id="rama"></select></div>
+            <div class="field" id="campo-tema"><label for="tema">Asunto de la tutela confirmado</label><select id="tema"></select></div>
+            <div class="field"><label for="estado">Estado</label><select id="estado"></select></div>
+            <fieldset class="field revisores" id="revisores"><legend>Revisado por (elige a quien revisó)</legend><div id="lista-revisores"></div></fieldset>
+            <div class="field"><label for="nota">Nota de revisión</label><textarea id="nota" maxlength="1000" placeholder="Por qué se confirma o se corrige la categoría, qué falta…"></textarea></div>
+            <p id="msg" class="alert" role="status" hidden></p>
+            <div class="res-actions"><button id="guardar" class="btn" type="button">Guardar cambios</button>
+              <a id="ficha" class="btn-sec" href="#" download>Descargar ficha PDF ↓</a></div>
+          </article>
+          <article class="panel">
+            <div class="panel-title"><div><span class="step">04</span><h2>Historial</h2></div></div>
+            <ul class="timeline" id="historial"></ul>
+          </article>
+        </div>
+      </section>
+    </div>
+    <footer class="page-footer"><span>Toda corrección queda registrada en el historial del expediente.</span><span>Proyecto académico <span class="footer-separator">/</span> Laboratorio 3</span></footer>
+  </main>
+</div>
+<script src="common.js"></script>
+<script src="documento.js"></script>
+</body>
+</html>
