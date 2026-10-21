@@ -132,3 +132,15 @@ table.mini{border-collapse:collapse;width:100%;font-size:13px;margin:8px 0}
 
 @media(max-width:1100px){.doc-grid{grid-template-columns:1fr}.stats{grid-template-columns:repeat(2,minmax(0,1fr))}.filters{grid-template-columns:1fr 1fr}.filters input{grid-column:1/-1}}
 @media(max-width:560px){.filters{grid-template-columns:1fr}.stats strong{font-size:24px}.bar-line{grid-template-columns:100px 1fr 40px}.res-cat{font-size:19px}}
+
+/* Integrantes del proyecto (menú lateral) */
+.equipo{margin:26px 3px 0;padding:14px 12px;border:1px solid #ece4f6;border-radius:13px;background:#faf8fe}
+.equipo-titulo{font:700 12px Manrope,sans-serif;letter-spacing:.2px;color:#4938b6;margin:0 0 10px;display:flex;align-items:center;gap:6px}
+.equipo-titulo:before{content:'';width:6px;height:6px;border-radius:50%;background:#31d9c7}
+.equipo-lista{list-style:none;margin:0;padding:0;display:grid;gap:9px}
+.equipo-lista li{display:flex;align-items:center;gap:9px;min-width:0}
+.equipo-avatar{flex-shrink:0;display:grid;place-items:center;width:28px;height:28px;border-radius:9px;font:700 10px Manrope,sans-serif;letter-spacing:.3px}
+.equipo-nombre{font-size:12px;line-height:1.3;color:#4a3a60;overflow-wrap:anywhere}
+.tono-0{background:#e9e2fb;color:#4938b6}.tono-1{background:#dff6f1;color:#0f6b5e}.tono-2{background:#fdeaec;color:#a8394d}.tono-3{background:#fdf0dd;color:#82500f}.tono-4{background:#e6eff6;color:#2c5673}
+.sidebar-card{margin-top:18px!important}
+@media(max-width:760px){.equipo{display:none}}

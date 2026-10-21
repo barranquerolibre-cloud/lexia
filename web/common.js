@@ -75,6 +75,8 @@ function barraLateral(activa) {
     item('/', 'radicar', '＋', 'Radicar'),
     item('/bandeja', 'bandeja', '▦', 'Bandeja'),
     item('/guia', 'guia', '✓', 'Guía paso a paso'),
+    h('section', {class: 'equipo', id: 'equipo', 'aria-labelledby': 'equipo-titulo', hidden: true},
+      h('h3', {id: 'equipo-titulo', class: 'equipo-titulo'}, 'Integrantes del proyecto'), h('ul', {class: 'equipo-lista', id: 'equipo-lista'})),
     h('div', {class: 'sidebar-card'}, h('span', {class: 'small-icon'}, '✧'),
       h('h3', {}, 'La tecnología apoya.', h('br'), 'Tu criterio decide.'),
       h('p', {}, 'El modelo propone una categoría; una persona la confirma o la corrige.')),
@@ -82,10 +84,26 @@ function barraLateral(activa) {
   ];
 }
 
+const iniciales = nombre => {
+  const p = nombre.split(/\s+/).filter(w => !['de', 'del', 'la'].includes(w.toLowerCase()));
+  return ((p[0] || '')[0] + (p.length > 1 ? p[p.length - 1][0] : '')).toUpperCase();
+};
+
+/** Lista de integrantes (viene del backend: datos/integrantes.json). Si no carga, la sección queda oculta. */
+async function cargarEquipo() {
+  try {
+    const {datos} = await api('/api/categorias');
+    if (!datos.integrantes || !datos.integrantes.length) return;
+    $('#equipo-lista').replaceChildren(...datos.integrantes.map((n, i) =>
+      h('li', {}, h('span', {class: `equipo-avatar tono-${i % 5}`, 'aria-hidden': 'true'}, iniciales(n)), h('span', {class: 'equipo-nombre'}, n))));
+    $('#equipo').hidden = false;
+  } catch { /* sin backend: la insignia ya avisa */ }
+}
+
 /** Monta el menú lateral y la insignia de estado del backend. */
 async function iniciarPagina(activa) {
   const lateral = $('.sidebar');
-  if (lateral) lateral.replaceChildren(...barraLateral(activa));
+  if (lateral) { lateral.replaceChildren(...barraLateral(activa)); cargarEquipo(); }
   const insignia = $('#backend-badge');
   if (!insignia) return null;
   try {
